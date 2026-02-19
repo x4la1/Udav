@@ -1,0 +1,25 @@
+# RUN: %udav %s | FileCheck --match-full-lines --strict-whitespace %s
+
+fun main():
+    println(int("52")) #CHECK:52
+    println(int("-52")) #CHECK-NEXT:-52
+    println(int("0520")) #CHECK-NEXT:520
+    println(int("-0520")) #CHECK-NEXT:-520
+    println(int(true)) #CHECK-NEXT:1
+    println(int(false)) #CHECK-NEXT:0
+    println(int(null)) #CHECK-NEXT:0
+    println(int("abc")) #CHECK-NEXT:null
+    println(int("a52")) #CHECK-NEXT:null
+    println(int("52a")) #CHECK-NEXT:null
+    println(int("-a52")) #CHECK-NEXT:null
+    println(int("-52a")) #CHECK-NEXT:null
+
+    println(str(52)) #CHECK-NEXT:52
+    println(str(-52)) #CHECK-NEXT:-52
+    println(str(true)) #CHECK-NEXT:true
+    println(str(false)) #CHECK-NEXT:false
+    println(str("-052")) #CHECK-NEXT:-052
+
+    println(len("52")) #CHECK-NEXT:2
+    println(len("")) #CHECK-NEXT:0
+    println(len("52\n\t")) #CHECK-NEXT:4
